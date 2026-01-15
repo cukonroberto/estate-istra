@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { Router, NavigationEnd, RouterOutlet } from '@angular/router';
+import {
+  Router,
+  NavigationEnd,
+  RouterOutlet,
+  RouterLink,
+} from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { NgIf } from '@angular/common';
 
@@ -9,7 +14,7 @@ import { MatButtonModule } from '@angular/material/button';
 @Component({
   standalone: true,
   selector: 'app-root',
-  imports: [RouterOutlet, MatToolbarModule, MatButtonModule, NgIf],
+  imports: [RouterOutlet, MatToolbarModule, MatButtonModule, NgIf, RouterLink],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })

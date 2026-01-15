@@ -1,4 +1,153 @@
-<div class="page">
-  <h1>Nekretnina</h1>
-  <p>Placeholder content</p>
+<div class="page detail" *ngIf="property() as p; else notFound">
+  <div class="crumbs">
+    <a routerLink="/nekretnine">← Natrag na nekretnine</a>
+  </div>
+
+  <header class="head">
+    <div>
+      <h1>{{ p.title }}</h1>
+      <p class="meta">{{ p.location }} • {{ p.areaM2 }} m²</p>
+    </div>
+
+    <div class="price">{{ formatPrice(p.priceEUR) }}</div>
+  </header>
+
+  <!-- Fotografije -->
+  <section class="section">
+    <h2>Fotografije</h2>
+
+    <div class="gallery">
+      <div
+        class="main"
+        [style.backgroundImage]="'url(' + (selectedImage() ?? p.imageUrl) + ')'"
+      ></div>
+
+      <div class="thumbs" *ngIf="(p.images?.length ?? 0) > 0">
+        <button
+          class="thumb"
+          *ngFor="let img of (p.images ?? [])"
+          (click)="pickImage(img)"
+          [style.backgroundImage]="'url(' + img + ')'"
+          [class.active]="img === selectedImage()"
+          type="button"
+        ></button>
+      </div>
+    </div>
+  </section>
+
+  <mat-divider></mat-divider>
+
+  <!-- Dron -->
+  <section class="section">
+    <h2>Dron</h2>
+
+    <mat-card class="embed" appearance="outlined">
+      <div class="embed-inner" *ngIf="p.droneUrl; else missingDrone">
+        <a class="link" [href]="p.droneUrl" target="_blank" rel="noreferrer">
+          Otvori dron sadržaj →
+        </a>
+        <div class="hint">Kasnije ovdje može ići embed video.</div>
+      </div>
+    </mat-card>
+
+    <ng-template #missingDrone>
+      <div class="empty">Nije dostupno.</div>
+    </ng-template>
+  </section>
+
+  <!-- 3D Matterport -->
+  <section class="section">
+    <h2>3D (Matterport)</h2>
+
+    <mat-card class="embed" appearance="outlined">
+      <div class="embed-inner" *ngIf="p.matterportUrl; else missing3d">
+        <a
+          class="link"
+          [href]="p.matterportUrl"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Otvori 3D prikaz →
+        </a>
+        <div class="hint">Kasnije: iframe embed Matterport-a.</div>
+      </div>
+    </mat-card>
+
+    <ng-template #missing3d>
+      <div class="empty">Nije dostupno.</div>
+    </ng-template>
+  </section>
+
+  <!-- Digitalni tlocrt -->
+  <section class="section">
+    <h2>Digitalni tlocrt</h2>
+
+    <mat-card class="floor" appearance="outlined">
+      <div
+        *ngIf="p.floorPlanUrl; else missingPlan"
+        class="floor-img"
+        [style.backgroundImage]="'url(' + p.floorPlanUrl + ')'"
+      ></div>
+    </mat-card>
+
+    <ng-template #missingPlan>
+      <div class="empty">Nije dostupno.</div>
+    </ng-template>
+  </section>
+
+  <!-- Dokumentacija -->
+  <section class="section">
+    <h2>Dokumentacija</h2>
+
+    <mat-card appearance="outlined" class="docs">
+      <div
+        *ngIf="(p.docs?.length ?? 0) > 0; else missingDocs"
+        class="docs-list"
+      >
+        <a
+          class="doc"
+          *ngFor="let d of (p.docs ?? [])"
+          [href]="d.url"
+          target="_blank"
+          rel="noreferrer"
+        >
+          {{ d.label }} →
+        </a>
+      </div>
+    </mat-card>
+
+    <ng-template #missingDocs>
+      <div class="empty">Nije dostupno.</div>
+    </ng-template>
+  </section>
+
+  <!-- Točna lokacija -->
+  <section class="section">
+    <h2>Točna lokacija</h2>
+
+    <mat-card class="map" appearance="outlined">
+      <div *ngIf="p.mapEmbedUrl; else missingMap" class="map-inner">
+        <!-- MVP: show link. Later: iframe -->
+        <a class="link" [href]="p.mapEmbedUrl" target="_blank" rel="noreferrer">
+          Otvori lokaciju →
+        </a>
+        <div class="hint">Kasnije: iframe Google Maps embed.</div>
+      </div>
+    </mat-card>
+
+    <ng-template #missingMap>
+      <div class="empty">Nije dostupno.</div>
+    </ng-template>
+  </section>
+
+  <footer class="cta">
+    <a mat-flat-button color="primary" routerLink="/kako-radimo">Kontakt</a>
+  </footer>
 </div>
+
+<ng-template #notFound>
+  <div class="page detail">
+    <h1>Nekretnina nije pronađena.</h1>
+    <a routerLink="/nekretnine">Nazad</a>
+  </div>
+</ng-template>

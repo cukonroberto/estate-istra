@@ -5,12 +5,10 @@
   right: 0;
   z-index: 1000;
 
-  /* glass look */
   background: rgba(255, 255, 255, 0.55);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 
-  /* subtle separation line instead of heavy shadow */
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   box-shadow: none;
 

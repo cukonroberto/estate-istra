@@ -1,4 +1,35 @@
-<div class="page">
-  <h1>Nekretnine</h1>
-  <p>Placeholder content</p>
+<div class="page props">
+  <header class="props-header">
+    <h1>Nekretnine</h1>
+    <p>Odabrane nekretnine u Istri. Kvaliteta ispred kvantitete.</p>
+  </header>
+
+  <section class="props-grid">
+    <a class="card-link" *ngFor="let p of properties">
+      <mat-card class="prop-card" appearance="outlined">
+        <div class="img" [style.backgroundImage]="'url(' + p.imageUrl + ')'">
+          <div class="badge" *ngIf="p.featured">Izdvojeno</div>
+        </div>
+
+        <mat-card-content>
+          <div class="top">
+            <div class="title">{{ p.title }}</div>
+            <div class="price">{{ formatPrice(p.priceEUR) }}</div>
+          </div>
+
+          <div class="meta">{{ p.location }} • {{ p.areaM2 }} m²</div>
+
+          <div class="actions">
+            <a
+              mat-flat-button
+              class="details-btn"
+              [routerLink]="['/nekretnina', p.id]"
+            >
+              Detalji
+            </a>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </a>
+  </section>
 </div>
