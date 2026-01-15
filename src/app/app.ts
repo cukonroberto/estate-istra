@@ -1,14 +1,27 @@
 import { Component } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
+import { Router, NavigationEnd, RouterOutlet } from '@angular/router';
+import { filter } from 'rxjs/operators';
+import { NgIf } from '@angular/common';
+
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { RouterOutlet } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
+  standalone: true,
   selector: 'app-root',
-  imports: [RouterOutlet, MatToolbarModule, MatButtonModule],
+  imports: [RouterOutlet, MatToolbarModule, MatButtonModule, NgIf],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
 export class App {
-  protected title = 'estate-istra';
+  isHome = true;
+
+  constructor(private router: Router) {
+    this.router.events
+      .pipe(filter((e) => e instanceof NavigationEnd))
+      .subscribe(() => {
+        this.isHome = this.router.url === '/' || this.router.url === '';
+        document.body.classList.toggle('no-scroll', this.isHome);
+      });
+  }
 }

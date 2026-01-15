@@ -1,4 +1,43 @@
-<div class="page">
-  <h1>Kako radimo</h1>
-  <p>Placeholder content</p>
+<div class="page how">
+  <header class="how-header">
+    <h1>Zašto radimo drugačije</h1>
+    <p>Tri jednostavna principa koja štite kupca i prodavatelja.</p>
+  </header>
+
+  <section class="how-grid">
+    <mat-card class="how-card" appearance="outlined">
+      <mat-card-title>Ekskluziva</mat-card-title>
+      <mat-card-content>
+        Radimo s ograničenim brojem nekretnina kako bismo imali pun fokus i
+        kontrolu kvalitete.
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="how-card" appearance="outlined">
+      <mat-card-title>Transparentnost</mat-card-title>
+      <mat-card-content>
+        Jasni uvjeti, realna cijena i otvorena komunikacija bez skrivenih
+        detalja.
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="how-card" appearance="outlined">
+      <mat-card-title>Kvaliteta ispred kvantitete</mat-card-title>
+      <mat-card-content>
+        Objavljujemo ono što ima smisla i što bismo i sami kupili.
+      </mat-card-content>
+    </mat-card>
+  </section>
+
+  <!-- Embed existing contact component -->
+  <app-contact [embedded]="true"></app-contact>
+
+  <footer class="legal">
+    <div>© {{ year }} Estate Istra. Sva prava pridržana.</div>
+    <div class="muted">
+      Sadržaj na stranici je informativan i ne predstavlja obvezujuću ponudu.
+      Podaci se mogu promijeniti bez prethodne najave. Upiti se koriste
+      isključivo u svrhu kontakta.
+    </div>
+  </footer>
 </div>

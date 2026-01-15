@@ -1,14 +1,12 @@
-<mat-toolbar color="primary">
-  <span style="font-weight: 500">Estate Istra</span>
+<mat-toolbar class="topbar">
+  <span style="font-weight: 700">Estate Istra</span>
 
   <span class="spacer"></span>
 
-  <a mat-button routerLink="/">Početna</a>
-  <a mat-button routerLink="/nekretnine">Nekretnine</a>
-  <a mat-button routerLink="/kako-radimo">Kako radimo</a>
-  <a mat-button routerLink="/kontakt">Kontakt</a>
+  <ng-container *ngIf="!isHome">
+    <a mat-button routerLink="/nekretnine">Nekretnine</a>
+    <a mat-button routerLink="/kako-radimo">Kako radimo</a>
+  </ng-container>
 </mat-toolbar>
-
-<router-outlet></router-outlet>
 
 <router-outlet></router-outlet>
