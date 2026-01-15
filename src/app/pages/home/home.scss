@@ -4,7 +4,7 @@
   display: grid;
   place-items: center;
 
-  background-image: url("..//../../assets/background.jpg");
+  background-image: url("/assets/background.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -15,12 +15,6 @@
 .hero-overlay {
   position: absolute;
   inset: 0;
-
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.35),
-    rgba(0, 0, 0, 0.25)
-  );
 }
 
 .hero-content {
@@ -36,12 +30,15 @@
   padding: 28px 32px;
   border-radius: 18px;
 
-  background: rgba(255, 255, 255, 0.452);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.22);
+
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
 
   text-align: left;
 }
@@ -71,13 +68,59 @@
 
 .hero-actions {
   display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  margin-top: 8px;
 }
 
-.hero-actions button {
-  color: black;
-  background-color: rgba(255, 255, 255, 0.452);
+.hero-actions a:last-child,
+.hero-actions button:last-child {
+  margin-left: auto;
+}
+
+:host ::ng-deep .hero-btn.mdc-button {
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  text-transform: none;
+
+  box-shadow: none !important;
+
+  transition: transform 120ms ease, background-color 120ms ease,
+    border-color 120ms ease;
+}
+
+:host ::ng-deep .hero-btn:hover {
+  transform: translateY(-1px);
+}
+
+:host ::ng-deep .hero-btn--primary.mdc-button {
+  color: rgba(0, 0, 0, 0.88);
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(8px);
+}
+
+:host ::ng-deep .hero-btn--secondary.mdc-button {
+  color: rgba(0, 0, 0, 0.78);
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8px);
+}
+
+:host ::ng-deep .hero-btn--primary:hover {
+  background: rgba(255, 255, 255, 0.88);
+  border-color: rgba(0, 0, 0, 0.18);
+}
+
+:host ::ng-deep .hero-btn--secondary:hover {
+  background: rgba(255, 255, 255, 0.68);
+  border-color: rgba(0, 0, 0, 0.16);
+}
+
+:host ::ng-deep .hero-btn:focus-visible {
+  outline: 2px solid rgba(0, 0, 0, 0.35);
+  outline-offset: 3px;
 }

@@ -10,12 +10,21 @@
       </p>
 
       <div class="hero-actions">
-        <button mat-fab extended routerLink="/nekretnine">
+        <a
+          mat-stroked-button
+          class="hero-btn hero-btn--primary"
+          routerLink="/nekretnine"
+        >
           Aktualne nekretnine
-        </button>
-        <button mat-fab extended id="right" routerLink="/kako-radimo">
+        </a>
+
+        <a
+          mat-stroked-button
+          class="hero-btn hero-btn--secondary"
+          routerLink="/kako-radimo"
+        >
           Kako radimo
-        </button>
+        </a>
       </div>
     </div>
   </div>

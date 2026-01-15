@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:gh": "ng build --configuration production --output-path docs --base-href /estate-istra/ && node -e \"const fs=require('fs');const path=require('path');const src='docs/browser'; if(!fs.existsSync(src)) process.exit(1); for(const f of fs.readdirSync(src)) fs.cpSync(path.join(src,f), path.join('docs',f), {recursive:true});\"",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
