@@ -5,6 +5,7 @@ import { HowWeWork } from './pages/how-we-work/how-we-work';
 import { PropertyDetail } from './pages/property-detail/property-detail';
 import { Contact } from './pages/contact/contact';
 
+//Base routing for now
 export const routes: Routes = [
   { path: '', component: Home },
   { path: 'nekretnine', component: Properties },
