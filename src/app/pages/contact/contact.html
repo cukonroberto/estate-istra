@@ -1,23 +1,28 @@
-<section class="contact" [class.embedded]="embedded">
-  <div class="contact-head" *ngIf="!embedded">
+<div class="page contact-page">
+  <header class="head">
     <h1>Kontakt</h1>
-    <p class="sub">Javite nam se i dogovorite kratki razgovor.</p>
-  </div>
-
-  <div class="contact-head" *ngIf="embedded">
-    <h2>Kontakt</h2>
     <p class="sub">
-      Radimo s ograničenim brojem nekretnina. Razglede radimo uz prethodnu
-      najavu.
+      Opći upiti i prvi kontakt. Ako upit nije vezan uz konkretnu odluku o
+      kupnji, koristite ovu formu.
     </p>
-  </div>
+  </header>
 
-  <div class="contact-grid">
-    <mat-card class="info" appearance="outlined">
-      <mat-card-title>Kontakt podaci</mat-card-title>
+  <section class="grid">
+    <mat-card appearance="outlined" class="info">
+      <mat-card-title>Podaci o firmi</mat-card-title>
       <mat-divider></mat-divider>
 
       <mat-card-content>
+        <div class="line">
+          <div class="label">Naziv</div>
+          <div class="value">{{ firmName }}</div>
+        </div>
+
+        <div class="line">
+          <div class="label">Adresa</div>
+          <div class="value">{{ address }}</div>
+        </div>
+
         <div class="line">
           <div class="label">Telefon</div>
           <div class="value">{{ phone }}</div>
@@ -28,26 +33,25 @@
           <div class="value">{{ email }}</div>
         </div>
 
-        <div class="small">
-          Preferiramo kratku poruku s osnovnim informacijama i terminom koji vam
-          odgovara.
+        <div class="hint">
+          Ova forma je za opća pitanja i informativne upite.
         </div>
       </mat-card-content>
     </mat-card>
 
-    <mat-card class="form" appearance="outlined">
-      <mat-card-title>Kratka forma</mat-card-title>
+    <mat-card appearance="outlined" class="form">
+      <mat-card-title>Kontakt forma</mat-card-title>
       <mat-divider></mat-divider>
 
       <mat-card-content>
         <form [formGroup]="form" (ngSubmit)="submit()">
           <mat-form-field appearance="outline" class="full">
-            <mat-label>Ime</mat-label>
-            <input matInput formControlName="name" />
+            <mat-label>Ime i prezime</mat-label>
+            <input matInput formControlName="fullName" />
             <mat-error
-              *ngIf="form.controls.name.touched && form.controls.name.invalid"
+              *ngIf="form.controls.fullName.touched && form.controls.fullName.invalid"
             >
-              Unesite ime (min 2 znaka).
+              Unesite ime i prezime (min 3 znaka).
             </mat-error>
           </mat-form-field>
 
@@ -62,8 +66,13 @@
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="full">
+            <mat-label>Telefon (opcionalno)</mat-label>
+            <input matInput formControlName="phone" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full">
             <mat-label>Poruka</mat-label>
-            <textarea matInput rows="3" formControlName="message"></textarea>
+            <textarea matInput rows="4" formControlName="message"></textarea>
             <mat-error
               *ngIf="form.controls.message.touched && form.controls.message.invalid"
             >
@@ -71,9 +80,20 @@
             </mat-error>
           </mat-form-field>
 
-          <button mat-flat-button color="primary" type="submit">Pošalji</button>
+          <button mat-flat-button color="primary" type="submit">
+            Pošalji upit
+          </button>
         </form>
       </mat-card-content>
     </mat-card>
-  </div>
-</section>
+  </section>
+
+  <footer class="legal">
+    <div>© {{ year }} Estate Istra. Sva prava pridržana.</div>
+    <div class="muted">
+      Sadržaj je informativan i ne predstavlja obvezujuću ponudu. Podaci se mogu
+      promijeniti bez prethodne najave. Upiti se koriste isključivo u svrhu
+      kontakta.
+    </div>
+  </footer>
+</div>

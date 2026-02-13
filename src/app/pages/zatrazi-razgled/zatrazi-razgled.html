@@ -1,0 +1,187 @@
+<div class="page razgled">
+  <header class="head">
+    <h1>Zatraži razgled nekretnine</h1>
+    <p class="sub">
+      Razgled organiziramo kada je kupac već upoznat s nekretninom i razmišlja o
+      konačnoj odluci. Ako razgled potvrdi vašu odluku, rezervacija se potvrđuje
+      avansom u iznosu od 10 % vrijednosti nekretnine.
+    </p>
+  </header>
+
+  <section class="grid" *ngIf="!submitted; else successTpl">
+    <mat-card class="card" appearance="outlined">
+      <mat-card-title>Podaci o kupcu</mat-card-title>
+      <mat-divider></mat-divider>
+
+      <mat-card-content>
+        <form [formGroup]="form" (ngSubmit)="submit()">
+          <div class="two">
+            <mat-form-field appearance="outline">
+              <mat-label>Ime i prezime</mat-label>
+              <input matInput formControlName="fullName" />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="email" />
+            </mat-form-field>
+          </div>
+
+          <div class="two">
+            <mat-form-field appearance="outline">
+              <mat-label>Telefon / WhatsApp</mat-label>
+              <input matInput formControlName="phone" />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Država prebivališta</mat-label>
+              <mat-select formControlName="country">
+                <mat-option value="HR">Hrvatska</mat-option>
+                <mat-option value="DE">Njemačka</mat-option>
+                <mat-option value="AT">Austrija</mat-option>
+                <mat-option value="IT">Italija</mat-option>
+                <mat-option value="SI">Slovenija</mat-option>
+                <mat-option value="CH">Švicarska</mat-option>
+                <mat-option value="OTHER">Ostalo</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="spacer"></div>
+
+          <div
+            class="prop"
+            *ngIf="form.value.propertyTitle || form.value.propertyLocation"
+          >
+            <div class="prop-title">Podaci o nekretnini</div>
+            <div class="prop-line" *ngIf="form.value.propertyTitle">
+              <span class="k">Naziv:</span> {{ form.value.propertyTitle }}
+            </div>
+            <div class="prop-line" *ngIf="form.value.propertyLocation">
+              <span class="k">Lokacija:</span> {{ form.value.propertyLocation }}
+            </div>
+          </div>
+
+          <div class="spacer"></div>
+
+          <mat-card class="subcard" appearance="outlined">
+            <mat-card-title>Namjena i financije</mat-card-title>
+            <mat-divider></mat-divider>
+
+            <mat-card-content>
+              <div class="three">
+                <mat-form-field appearance="outline">
+                  <mat-label>Svrha kupnje</mat-label>
+                  <mat-select formControlName="purpose">
+                    <mat-option value="stanovanje">Stanovanje</mat-option>
+                    <mat-option value="odmor">Odmor</mat-option>
+                    <mat-option value="investicija">Investicija</mat-option>
+                    <mat-option value="kombinirano">Kombinirano</mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                  <mat-label>Status sredstava</mat-label>
+                  <mat-select formControlName="fundsStatus">
+                    <mat-option value="osigurana">Osigurana</mat-option>
+                    <mat-option value="djelomicno"
+                      >Djelomično osigurana</mat-option
+                    >
+                    <mat-option value="u-postupku">U postupku</mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                  <mat-label>Način kupnje</mat-label>
+                  <mat-select formControlName="purchaseMethod">
+                    <mat-option value="vlastita">Vlastita sredstva</mat-option>
+                    <mat-option value="kredit">Kredit</mat-option>
+                    <mat-option value="kombinacija">Kombinacija</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </mat-card-content>
+          </mat-card>
+
+          <mat-card class="subcard" appearance="outlined">
+            <mat-card-title>Vremenski okvir</mat-card-title>
+            <mat-divider></mat-divider>
+
+            <mat-card-content>
+              <mat-form-field appearance="outline" class="full">
+                <mat-label>Rok realizacije</mat-label>
+                <mat-select formControlName="timeline">
+                  <mat-option value="odmah">Odmah / vrlo kratko</mat-option>
+                  <mat-option value="1-3">1–3 mjeseca</mat-option>
+                  <mat-option value="3-6">3–6 mjeseci</mat-option>
+                  <mat-option value="neodredeno">Neodređeno</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </mat-card-content>
+          </mat-card>
+
+          <mat-card class="subcard" appearance="outlined">
+            <mat-card-title>Rezervacija (ključno)</mat-card-title>
+            <mat-divider></mat-divider>
+
+            <mat-card-content>
+              <mat-form-field appearance="outline" class="full">
+                <mat-label>
+                  Ako razgled potvrdi vašu odluku, jeste li spremni u kratkom
+                  roku uplatiti avans (10%)?
+                </mat-label>
+                <mat-select formControlName="depositReady">
+                  <mat-option value="da">Da</mat-option>
+                  <mat-option value="ne">Ne</mat-option>
+                  <mat-option value="nisam-siguran">Nisam siguran</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="full">
+                <mat-label>Dodatne napomene (opcionalno)</mat-label>
+                <textarea matInput rows="3" formControlName="notes"></textarea>
+              </mat-form-field>
+
+              <mat-checkbox formControlName="confirmedReviewed">
+                Potvrđujem da sam pregledao/la kompletnu prezentaciju nekretnine
+                (fotografije, tlocrt, 3D obilazak, tehničke podatke,
+                dokumentaciju i točnu lokaciju).
+              </mat-checkbox>
+
+              <div class="actions">
+                <button mat-flat-button color="primary" type="submit">
+                  Pošalji zahtjev za razgled
+                </button>
+              </div>
+
+              <div class="hint">
+                Ova forma služi isključivo za operativni zahtjev za razgled. Za
+                opća pitanja koristite <a routerLink="/kontakt">/kontakt</a>.
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </section>
+
+  <ng-template #successTpl>
+    <mat-card class="success" appearance="outlined">
+      <mat-card-title>Hvala na vašem zahtjevu.</mat-card-title>
+      <mat-card-content>
+        Zahtjev ćemo pregledati i javiti vam se radi dogovora sljedećih koraka.
+        <br /><br />
+        Razglede organiziramo nakon kratke provjere. U slučaju pozitivne odluke,
+        rezervacija se potvrđuje avansom od 10 % vrijednosti nekretnine.
+      </mat-card-content>
+    </mat-card>
+  </ng-template>
+
+  <footer class="legal">
+    <div>© {{ year }} Estate Istra. Sva prava pridržana.</div>
+    <div class="muted">
+      Ova forma služi isključivo za operativni zahtjev za razgled. Za opća
+      pitanja koristite /kontakt.
+    </div>
+  </footer>
+</div>

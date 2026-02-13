@@ -1,6 +1,10 @@
-import { Component, Input } from '@angular/core';
-import { NgIf } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import {
+  ReactiveFormsModule,
+  FormBuilder,
+  Validators,
+  FormGroup,
+} from '@angular/forms';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -12,7 +16,6 @@ import { MatDividerModule } from '@angular/material/divider';
   standalone: true,
   selector: 'app-contact',
   imports: [
-    NgIf,
     ReactiveFormsModule,
     MatCardModule,
     MatButtonModule,
@@ -24,17 +27,20 @@ import { MatDividerModule } from '@angular/material/divider';
   styleUrl: './contact.scss',
 })
 export class Contact {
-  @Input() embedded = false;
+  year = new Date().getFullYear();
 
+  firmName = 'Estate Istra';
+  address = 'Istra, Hrvatska (precizna adresa na upit)';
   phone = '+385 XX XXX XXXX';
   email = 'info@estateistra.hr';
 
-  form;
+  form: FormGroup;
 
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(2)]],
+      fullName: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
+      phone: [''],
       message: ['', [Validators.required, Validators.minLength(10)]],
     });
   }
@@ -45,7 +51,7 @@ export class Contact {
       return;
     }
 
-    console.log('Contact form submitted', this.form.value);
+    console.log('Kontakt upit', this.form.value);
     this.form.reset();
   }
 }

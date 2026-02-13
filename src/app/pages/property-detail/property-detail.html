@@ -141,7 +141,14 @@
   </section>
 
   <footer class="cta">
-    <a mat-flat-button color="primary" routerLink="/kako-radimo">Kontakt</a>
+    <a
+      mat-flat-button
+      color="primary"
+      [routerLink]="['/zatrazi-razgled']"
+      [queryParams]="{ title: p.title, location: p.location, code: p.id }"
+    >
+      Zatraži razgled
+    </a>
   </footer>
 </div>
 

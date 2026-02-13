@@ -6,6 +6,7 @@ import { PropertyDetail } from './pages/property-detail/property-detail';
 import { Contact } from './pages/contact/contact';
 import { ZaKupce } from './pages/za-kupce/za-kupce';
 import { ZaVlasnike } from './pages/za-vlasnike/za-vlasnike';
+import { ZatraziRazgled } from './pages/zatrazi-razgled/zatrazi-razgled';
 
 //Base routing for now
 export const routes: Routes = [
@@ -16,5 +17,6 @@ export const routes: Routes = [
   { path: 'kontakt', component: Contact },
   { path: 'za-kupce', component: ZaKupce },
   { path: 'za-vlasnike', component: ZaVlasnike },
+  { path: 'zatrazi-razgled', component: ZatraziRazgled },
   { path: '**', redirectTo: '' },
 ];

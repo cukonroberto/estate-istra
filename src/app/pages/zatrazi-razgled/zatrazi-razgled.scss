@@ -1,0 +1,161 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  padding-top: 96px;
+
+  background: radial-gradient(
+      900px 520px at 15% 10%,
+      rgba(25, 118, 210, 0.14),
+      transparent 60%
+    ),
+    radial-gradient(
+      740px 520px at 85% 20%,
+      rgba(120, 144, 156, 0.16),
+      transparent 58%
+    ),
+    linear-gradient(#ffffff, #f3f5f7);
+}
+
+.page.razgled {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 28px 24px 56px;
+}
+
+.head {
+  margin-bottom: 16px;
+
+  h1 {
+    margin: 0 0 10px;
+    font-size: clamp(30px, 3.2vw, 42px);
+    letter-spacing: -0.7px;
+    line-height: 1.05;
+  }
+
+  .sub {
+    margin: 0;
+    color: rgba(0, 0, 0, 0.65);
+    line-height: 1.6;
+    max-width: 90ch;
+  }
+}
+
+.grid {
+  margin-top: 14px;
+}
+
+.card {
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 16px 42px rgba(0, 0, 0, 0.06);
+}
+
+.subcard {
+  margin-top: 12px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.65);
+}
+
+:host ::ng-deep .mat-mdc-card-title {
+  padding: 14px 16px 0 16px !important;
+  font-weight: 900;
+  font-size: 14px;
+}
+
+:host ::ng-deep .mat-mdc-card-content {
+  padding: 10px 16px 16px 16px !important;
+}
+
+.two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.three {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+}
+
+.full {
+  width: 100%;
+}
+
+.spacer {
+  height: 10px;
+}
+
+.prop {
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.prop-title {
+  font-weight: 900;
+  margin-bottom: 6px;
+  font-size: 13px;
+}
+
+.prop-line {
+  color: rgba(0, 0, 0, 0.72);
+  line-height: 1.5;
+  font-size: 13px;
+
+  .k {
+    color: rgba(0, 0, 0, 0.55);
+    font-weight: 700;
+    margin-right: 6px;
+  }
+}
+
+.actions {
+  margin-top: 12px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.hint {
+  margin-top: 10px;
+  color: rgba(0, 0, 0, 0.58);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.success {
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(12px);
+}
+
+.legal {
+  margin-top: 18px;
+  padding: 12px 0 18px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  font-size: 12px;
+}
+
+.legal .muted {
+  margin-top: 6px;
+  color: rgba(0, 0, 0, 0.55);
+  line-height: 1.5;
+  max-width: 110ch;
+}
+
+@media (max-width: 900px) {
+  .two,
+  .three {
+    grid-template-columns: 1fr;
+  }
+
+  .actions {
+    justify-content: flex-start;
+  }
+}

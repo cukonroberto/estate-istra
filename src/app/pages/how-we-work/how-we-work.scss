@@ -4,76 +4,263 @@
   padding-top: 96px;
 
   background: radial-gradient(
-      900px 500px at 15% 10%,
-      rgba(25, 118, 210, 0.18),
+      900px 520px at 15% 10%,
+      rgba(25, 118, 210, 0.14),
       transparent 60%
     ),
     radial-gradient(
-      700px 450px at 85% 20%,
-      rgba(120, 144, 156, 0.22),
-      transparent 55%
+      740px 520px at 85% 20%,
+      rgba(120, 144, 156, 0.16),
+      transparent 58%
     ),
     linear-gradient(#ffffff, #f3f5f7);
 }
 
 .page.how {
-  max-width: 1200px;
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 24px 24px 60px;
+  padding: 28px 24px 56px;
 }
 
 .how-header {
-  margin-bottom: 24px;
+  margin-bottom: 20px;
+
+  .eyebrow {
+    font-weight: 900;
+    letter-spacing: 1.1px;
+    text-transform: uppercase;
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.55);
+    margin-bottom: 8px;
+  }
 
   h1 {
-    margin: 0 0 8px;
-    font-size: clamp(28px, 3vw, 40px);
-    letter-spacing: -0.5px;
-    line-height: 1.1;
+    margin: 0 0 10px;
+    font-size: clamp(30px, 3.2vw, 42px);
+    letter-spacing: -0.7px;
+    line-height: 1.05;
   }
 
   p {
     margin: 0;
     color: rgba(0, 0, 0, 0.65);
-    max-width: 70ch;
+    max-width: 80ch;
     line-height: 1.6;
+  }
+}
+
+.how-section {
+  margin-top: 26px;
+}
+
+.section-head {
+  margin-bottom: 12px;
+
+  h2 {
+    margin: 0 0 6px;
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: -0.2px;
+  }
+
+  .sub {
+    margin: 0;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 13px;
+    line-height: 1.45;
   }
 }
 
 .how-grid {
   display: grid;
-  gap: 16px;
+  gap: 14px;
   grid-template-columns: repeat(3, 1fr);
-  margin-bottom: 28px;
 }
 
 .how-card {
-  border-radius: 14px;
+  border-radius: 16px;
   overflow: hidden;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 16px 42px rgba(0, 0, 0, 0.06);
+  transition: transform 140ms ease, box-shadow 140ms ease;
+}
 
-  mat-card-title {
-    font-weight: 700;
-    margin-bottom: 8px;
-  }
-
-  mat-card-content {
-    color: rgba(0, 0, 0, 0.72);
-    line-height: 1.6;
-  }
+.how-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 22px 56px rgba(0, 0, 0, 0.08);
 }
 
 :host ::ng-deep .how-card .mat-mdc-card-title {
-  padding: 18px 18px 0 18px !important;
+  padding: 14px 16px 0 16px !important;
+  font-weight: 900;
+  font-size: 14px;
 }
 
 :host ::ng-deep .how-card .mat-mdc-card-content {
-  padding: 10px 18px 18px 18px !important;
+  padding: 8px 16px 14px 16px !important;
+  color: rgba(0, 0, 0, 0.7);
+  line-height: 1.55;
+  font-size: 13px;
 }
 
-.how-actions {
+.model {
+  display: grid;
+  gap: 12px;
+}
+
+.model-card {
+  border-radius: 16px;
+  padding: 14px 16px;
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 14px;
+  align-items: start;
+
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 16px 42px rgba(0, 0, 0, 0.06);
+  transition: transform 140ms ease, box-shadow 140ms ease;
+}
+
+.model-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 22px 56px rgba(0, 0, 0, 0.08);
+}
+
+.rail {
+  display: grid;
+  justify-items: center;
+}
+
+.num {
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.75);
+
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.08);
+}
+
+.line {
+  width: 2px;
+  height: 100%;
+  min-height: 42px;
+  margin-top: 10px;
+  border-radius: 2px;
+  background: linear-gradient(rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.02));
+}
+
+.txt .title {
+  font-weight: 900;
+  margin-bottom: 4px;
+  letter-spacing: -0.2px;
+}
+
+.txt .desc {
+  color: rgba(0, 0, 0, 0.68);
+  line-height: 1.55;
+  font-size: 13.5px;
+}
+
+.split {
   margin-top: 24px;
+  display: grid;
+  gap: 14px;
+  grid-template-columns: 1.2fr 0.8fr;
+}
+
+.split-card {
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 16px 42px rgba(0, 0, 0, 0.06);
+}
+
+:host ::ng-deep .split-card .mat-mdc-card-title {
+  padding: 14px 16px 0 16px !important;
+  font-weight: 900;
+  font-size: 14px;
+}
+
+:host ::ng-deep .split-card .mat-mdc-card-content {
+  padding: 10px 16px 16px 16px !important;
+}
+
+.cols {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.kicker {
+  font-weight: 900;
+  font-size: 12px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.55);
+  margin-bottom: 8px;
+}
+
+ul {
+  margin: 0;
+  padding-left: 18px;
+  color: rgba(0, 0, 0, 0.7);
+  line-height: 1.55;
+  font-size: 13px;
+}
+
+.how-cta {
+  margin-top: 22px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: center;
+}
+
+.cta-left .cta-title {
+  font-weight: 900;
+  letter-spacing: -0.2px;
+  margin-bottom: 2px;
+}
+
+.cta-left .cta-sub {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.cta-actions {
   display: flex;
-  justify-content: flex-end;
+  gap: 12px;
+  align-items: center;
+}
+
+.cta-btn {
+  border-radius: 12px;
+  font-weight: 900;
+  text-transform: none;
+}
+
+.note {
+  grid-column: 1 / -1;
+  color: rgba(0, 0, 0, 0.58);
+  font-size: 12px;
+  line-height: 1.45;
+  margin-top: 4px;
 }
 
 .legal {
@@ -90,12 +277,31 @@
   max-width: 110ch;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
+  .how-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 800px) {
   .how-grid {
     grid-template-columns: 1fr;
   }
 
-  .how-actions {
+  .split {
+    grid-template-columns: 1fr;
+  }
+
+  .cols {
+    grid-template-columns: 1fr;
+  }
+
+  .how-cta {
+    grid-template-columns: 1fr;
+  }
+
+  .cta-actions {
     justify-content: flex-start;
+    flex-wrap: wrap;
   }
 }
