@@ -1,0 +1,227 @@
+<section class="page owners">
+  <header class="header">
+    <div class="kicker">Za vlasnike nekretnina</div>
+    <h1>
+      Prodaja bez kaosa. Kontrolirano. <em>Profesionalno.</em> Transparentno.
+    </h1>
+  </header>
+
+  <div class="grid-2">
+    <mat-card class="card" appearance="outlined">
+      <mat-card-header>
+        <mat-card-title>S kim radimo</mat-card-title>
+        <mat-card-subtitle
+          >Vlasnici koji žele ozbiljan proces.</mat-card-subtitle
+        >
+      </mat-card-header>
+
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item *ngFor="let item of withOwners">
+            <mat-icon matListItemIcon>check</mat-icon>
+            <div matListItemTitle>{{ item }}</div>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="card" appearance="outlined">
+      <mat-card-header>
+        <mat-card-title>S kim ne radimo</mat-card-title>
+        <mat-card-subtitle>Da odmah bude jasno.</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item *ngFor="let item of withoutOwners">
+            <mat-icon matListItemIcon>close</mat-icon>
+            <div matListItemTitle>{{ item }}</div>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <mat-card class="card wide" appearance="outlined">
+    <mat-card-header>
+      <mat-card-title
+        >Zašto radimo isključivo s ekskluzivnim ugovorima</mat-card-title
+      >
+      <mat-card-subtitle
+        >Bez rasipanja marketinga i bez “više agencija”
+        kaosa.</mat-card-subtitle
+      >
+    </mat-card-header>
+
+    <mat-card-content class="bullets">
+      <div class="bullet">
+        <div class="bullet-title">Ulažemo u vrhunsku prezentaciju</div>
+        <div class="bullet-text">
+          Foto, video, dron, 3D, tlocrti — sve na razini.
+        </div>
+      </div>
+      <div class="bullet">
+        <div class="bullet-title">Kontroliramo komunikaciju i marketing</div>
+        <div class="bullet-text">
+          Jedna poruka, jedan kanal, bez kontradiktornih oglasa.
+        </div>
+      </div>
+      <div class="bullet">
+        <div class="bullet-title">Štitimo vrijednost nekretnine</div>
+        <div class="bullet-text">
+          Nema “spuštanja dojma” masovnim oglasima i nestručnim razgledima.
+        </div>
+      </div>
+      <div class="bullet">
+        <div class="bullet-title">Proces je profesionalan i miran</div>
+        <div class="bullet-text">
+          Filtriranje kupaca prije razgleda, jasni koraci, manje stresa.
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <div class="grid-2">
+    <mat-card class="card" appearance="outlined">
+      <mat-card-header>
+        <mat-card-title>Što dobivate suradnjom</mat-card-title>
+        <mat-card-subtitle
+          >Praktične stvari koje čine razliku.</mat-card-subtitle
+        >
+      </mat-card-header>
+
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item *ngFor="let b of benefits">
+            <mat-icon matListItemIcon>done</mat-icon>
+            <div matListItemTitle>{{ b }}</div>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="card" appearance="outlined">
+      <mat-card-header>
+        <mat-card-title>Kako izgleda suradnja</mat-card-title>
+        <mat-card-subtitle>Jasan proces, bez improvizacije.</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <ol class="steps">
+          <li *ngFor="let s of steps">{{ s }}</li>
+        </ol>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <mat-card class="card wide" appearance="outlined">
+    <mat-card-header>
+      <mat-card-title
+        >Dokumentacija prije početka suradnje — obavezno</mat-card-title
+      >
+      <mat-card-subtitle>
+        Bez osnovne dokumentacije ne krećemo u oglašavanje. Stanje mora biti
+        jasno prije početka.
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <mat-accordion class="docs" multi>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>1) Obavezno za sve nekretnine</mat-panel-title>
+          </mat-expansion-panel-header>
+          <ul class="doclist">
+            <li>Izvadak iz zemljišne knjige (ZK)</li>
+            <li>Katastarski izvadak / posjedovni list</li>
+            <li>Osobni dokument vlasnika</li>
+            <li>Suglasnost svih suvlasnika (ako postoji suvlasništvo)</li>
+            <li>Informacija o teretima / zabilježbama / postupcima</li>
+            <li>Informacija o usklađenosti stvarnog i upisanog stanja</li>
+          </ul>
+          <div class="note">
+            Bez ove dokumentacije ne započinjemo oglašavanje.
+          </div>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>2) Dodatno — kuće</mat-panel-title>
+          </mat-expansion-panel-header>
+          <ul class="doclist">
+            <li>Građevinska dozvola ili uporabna dozvola</li>
+            <li>
+              Rješenje o izvedenom stanju (legalizacija), ako je primjenjivo
+            </li>
+            <li>Potvrda starosti objekta (prije 1968.), ako je primjenjivo</li>
+            <li>Projektna dokumentacija (ako postoji)</li>
+            <li>Energetski certifikat (ako postoji)</li>
+            <li>
+              Dokumentacija za dodatne objekte (bazen, garaža, pomoćni objekt)
+            </li>
+          </ul>
+          <div class="note">
+            Ako dio objekta nije legalan/evidentiran — mora biti poznato
+            unaprijed.
+          </div>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>3) Dodatno — stanovi</mat-panel-title>
+          </mat-expansion-panel-header>
+          <ul class="doclist">
+            <li>Dokaz o etažiranju</li>
+            <li>Građevinska i uporabna dozvola zgrade</li>
+            <li>Međuvlasnički ugovor (ako postoji)</li>
+            <li>Podaci o upravitelju zgrade</li>
+            <li>Iznos pričuve</li>
+            <li>Informacija o dugovanjima (ako postoje)</li>
+            <li>Suglasnosti za izvedene preinake (ako su rađene)</li>
+          </ul>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>4) Dodatno — zemljišta</mat-panel-title>
+          </mat-expansion-panel-header>
+          <ul class="doclist">
+            <li>Točna oznaka katastarske čestice</li>
+            <li>Lokacijska informacija / namjena prema prostornom planu</li>
+            <li>Pristupni put (javna cesta ili suglasnost susjeda)</li>
+            <li>Podaci o mogućim priključcima (ako postoje)</li>
+            <li>Idejni projekt (ako postoji)</li>
+            <li>Posebni uvjeti gradnje (ako postoje)</li>
+          </ul>
+        </mat-expansion-panel>
+      </mat-accordion>
+
+      <div class="note subtle">
+        Ako dokumentacija nije potpuna, to ne znači da suradnja nije moguća —
+        ali stanje mora biti jasno prije početka oglašavanja, a ne tijekom
+        prodaje.
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <div class="cta-bottom">
+    <mat-card class="cta" appearance="outlined">
+      <div class="cta-text">
+        <div class="cta-title">Razgovarajmo o vašoj nekretnini.</div>
+        <div class="cta-sub">Javite nam se — kratko, jasno, bez obveze.</div>
+      </div>
+      <div class="cta-actions">
+        <a mat-flat-button color="primary" routerLink="/kontakt">Kontakt</a>
+      </div>
+    </mat-card>
+  </div>
+
+  <footer class="legal">
+    <div>© {{ year }} Estate Istra. Sva prava pridržana.</div>
+    <div class="muted">
+      Sadržaj na stranici je informativan i ne predstavlja obvezujuću ponudu.
+      Podaci se mogu promijeniti bez prethodne najave. Upiti se koriste
+      isključivo u svrhu kontakta.
+    </div>
+  </footer>
+</section>

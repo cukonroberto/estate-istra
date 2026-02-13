@@ -1,0 +1,205 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  padding-top: 96px;
+
+  background: radial-gradient(
+      900px 500px at 12% 10%,
+      rgba(25, 118, 210, 0.14),
+      transparent 60%
+    ),
+    radial-gradient(
+      700px 450px at 88% 18%,
+      rgba(120, 144, 156, 0.16),
+      transparent 55%
+    ),
+    linear-gradient(#ffffff, #f3f5f7);
+}
+
+.page.owners {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 24px 70px;
+}
+
+.header {
+  margin-bottom: 18px;
+
+  .kicker {
+    font-size: 12px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.55);
+    font-weight: 800;
+    margin-bottom: 10px;
+  }
+
+  h1 {
+    margin: 0 0 10px;
+    font-size: clamp(28px, 3vw, 42px);
+    letter-spacing: -0.7px;
+    line-height: 1.1;
+  }
+
+  .sub {
+    margin: 0;
+    max-width: 80ch;
+    color: rgba(0, 0, 0, 0.68);
+    line-height: 1.6;
+  }
+
+  .header-actions {
+    margin-top: 14px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .btn--ghost {
+    opacity: 0.85;
+  }
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.card {
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.wide {
+  margin-top: 16px;
+}
+
+:host ::ng-deep mat-card-header {
+  padding: 18px 18px 0 18px !important;
+}
+:host ::ng-deep mat-card-content {
+  padding: 14px 18px 18px 18px !important;
+}
+
+.bullets {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.bullet {
+  padding: 12px 12px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+
+  .bullet-title {
+    font-weight: 800;
+    margin-bottom: 6px;
+    letter-spacing: -0.2px;
+  }
+
+  .bullet-text {
+    color: rgba(0, 0, 0, 0.68);
+    line-height: 1.55;
+    font-size: 13px;
+  }
+}
+
+.steps {
+  margin: 0;
+  padding-left: 18px;
+
+  li {
+    margin: 8px 0;
+    color: rgba(0, 0, 0, 0.72);
+    line-height: 1.5;
+  }
+}
+
+.docs {
+  margin-top: 8px;
+}
+
+.doclist {
+  margin: 0;
+  padding-left: 18px;
+
+  li {
+    margin: 7px 0;
+    color: rgba(0, 0, 0, 0.72);
+    line-height: 1.5;
+  }
+}
+
+.note {
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  background: rgba(255, 255, 255, 0.55);
+  color: rgba(0, 0, 0, 0.68);
+  font-size: 13px;
+  line-height: 1.55;
+
+  &.subtle {
+    margin-top: 12px;
+    opacity: 0.9;
+  }
+}
+
+.cta-bottom {
+  margin-top: 18px;
+}
+
+.cta {
+  border-radius: 18px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.cta-title {
+  font-weight: 900;
+  letter-spacing: -0.2px;
+}
+
+.cta-sub {
+  color: rgba(0, 0, 0, 0.65);
+  font-size: 13px;
+  margin-top: 2px;
+}
+
+.legal {
+  margin-top: 22px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  font-size: 12px;
+
+  .muted {
+    margin-top: 6px;
+    color: rgba(0, 0, 0, 0.55);
+    line-height: 1.5;
+    max-width: 110ch;
+  }
+}
+
+@media (max-width: 1000px) {
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .bullets {
+    grid-template-columns: 1fr;
+  }
+
+  .cta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
