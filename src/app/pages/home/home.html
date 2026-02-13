@@ -1,29 +1,45 @@
-<section class="hero">
-  <div class="hero-overlay"></div>
+<section class="landing">
+  <div class="landing__overlay"></div>
 
-  <div class="hero-content">
-    <div class="hero-card">
-      <div class="hero-kicker">ESTATE ISTRA</div>
-      <h3>Ekskluzivno odabrane nekretnine u južnoj Istri</h3>
-      <p class="hero-sub">
-        Ne prodajemo sve. Prodajemo samo ono iza čega možemo stati iskustvom.
-      </p>
+  <div class="landing__content">
+    <!-- Add logo here later-->
+    <div class="brand">
+      <div class="brand__title">ESTATE ISTRA</div>
+    </div>
 
-      <div class="hero-actions">
-        <a
-          mat-stroked-button
-          class="hero-btn hero-btn--primary"
-          routerLink="/nekretnine"
-        >
-          Aktualne nekretnine
+    <h1 class="landing__headline">
+      Birane nekretnine u Istri,
+      <em>predstavljene<br />na način kakav zaslužuju.</em>
+    </h1>
+
+    <div class="landing__panel">
+      <div class="btn-grid">
+        <a mat-stroked-button class="nav-btn" routerLink="/nekretnine">
+          Odabrane nekretnine
+        </a>
+
+        <a mat-stroked-button class="nav-btn" routerLink="/kontakt">
+          Kontakt
+        </a>
+
+        <a mat-stroked-button class="nav-btn" routerLink="/kako-radimo">
+          Kako radimo
         </a>
 
         <a
           mat-stroked-button
-          class="hero-btn hero-btn--secondary"
-          routerLink="/kako-radimo"
+          class="nav-btn nav-btn--row2"
+          routerLink="/za-kupce"
         >
-          Kako radimo
+          Za kupce
+        </a>
+
+        <a
+          mat-stroked-button
+          class="nav-btn nav-btn--row2"
+          routerLink="/za-vlasnike"
+        >
+          Za vlasnike nekretnina
         </a>
       </div>
     </div>
