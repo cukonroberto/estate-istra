@@ -28,13 +28,12 @@
   font-weight: 700;
 }
 
-/* HERO */
+/* HERO (FULL WIDTH IMAGE + TEXT UNDER) */
 .hero {
   margin-top: 12px;
-  display: grid;
-  grid-template-columns: 1.35fr 0.65fr;
-  gap: 18px;
-  align-items: start;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .hero-media {
@@ -43,7 +42,7 @@
 }
 
 .hero-img {
-  height: 620px;
+  height: 640px;
   border-radius: 20px;
   background-size: cover;
   background-position: center;
@@ -59,7 +58,6 @@
   border-radius: 999px;
   border: 1px solid rgba(0, 0, 0, 0.12);
   background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(6px);
   display: grid;
   place-items: center;
   cursor: pointer;
@@ -103,15 +101,28 @@
   opacity: 1;
 }
 
+.hero-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.title-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+}
+
 .hero-info h1 {
-  margin: 0 0 8px;
-  font-size: clamp(28px, 3vw, 42px);
+  margin: 0;
+  font-size: clamp(28px, 3.2vw, 44px);
   letter-spacing: -0.7px;
-  line-height: 1.08;
+  line-height: 1.06;
 }
 
 .meta {
-  margin: 0 0 12px;
+  margin: 0;
   color: rgba(0, 0, 0, 0.65);
 }
 
@@ -124,28 +135,20 @@
 /* NAV STRIP (centered + no blur) */
 .blok-nav {
   position: sticky;
-  top: 72px; /* under toolbar */
-  z-index: 5;
-  margin-top: 14px;
+  top: 72px;
+  z-index: 10;
+  margin-top: 10px;
 
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
 
   padding: 10px 12px;
   border-radius: 14px;
 
-  /* remove blur -> fixes “blurry font” */
   background: rgba(255, 255, 255, 0.92);
   border: 1px solid rgba(0, 0, 0, 0.08);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
-}
-
-.blok-label {
-  font-weight: 800;
-  color: rgba(0, 0, 0, 0.72);
-  white-space: nowrap;
 }
 
 .blok-items {
@@ -306,17 +309,20 @@
   :host {
     padding-top: 76px;
   }
+
   .page.detail {
     padding: 18px 14px 46px;
   }
 
-  .hero {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
   .hero-img {
     height: min(52vh, 420px);
     border-radius: 18px;
+  }
+
+  .title-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
   }
 
   .thumbs {
@@ -325,6 +331,7 @@
     -webkit-overflow-scrolling: touch;
     padding-bottom: 6px;
   }
+
   .thumb {
     flex: 0 0 auto;
   }
@@ -333,16 +340,15 @@
     top: 56px;
     padding: 10px 10px;
     border-radius: 16px;
-    backdrop-filter: blur(6px);
   }
 
-  /* THIS is the key: no wrapping pills */
   .blok-items {
     flex-wrap: nowrap;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     padding-bottom: 4px;
   }
+
   .blok-item {
     flex: 0 0 auto;
     padding: 9px 12px;
@@ -360,6 +366,7 @@
     flex-direction: column;
     align-items: stretch;
   }
+
   .doc-btn {
     width: 100%;
     justify-content: center;
@@ -368,6 +375,7 @@
   .cta {
     justify-content: stretch;
   }
+
   .cta a[mat-flat-button] {
     width: 100%;
     justify-content: center;

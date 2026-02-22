@@ -46,8 +46,8 @@ export class PropertyDetail {
       this.id.set(id);
 
       const p = PROPERTIES.find((x) => x.id === id);
-      const first = p?.images?.[0] ?? p?.imageUrl ?? null;
-      this.selectedImage.set(first);
+      const list = p?.images?.length ? p.images : [p?.imageUrl ?? ''];
+      this.selectedImage.set(list[0] ?? p?.imageUrl ?? null);
     });
   }
 
@@ -60,25 +60,23 @@ export class PropertyDetail {
   }
 
   prevImage(images: string[]) {
-    const arr = images?.length ? images : [];
-    if (!arr.length) return;
+    if (!images?.length) return;
 
-    const current = this.selectedImage() ?? arr[0];
-    const idx = arr.indexOf(current);
-    const safeIdx = idx >= 0 ? idx : 0;
-    const nextIdx = (safeIdx - 1 + arr.length) % arr.length;
-    this.selectedImage.set(arr[nextIdx]);
+    const current = this.selectedImage() ?? images[0];
+    const idx = Math.max(0, images.indexOf(current));
+    const prev = (idx - 1 + images.length) % images.length;
+
+    this.selectedImage.set(images[prev]);
   }
 
   nextImage(images: string[]) {
-    const arr = images?.length ? images : [];
-    if (!arr.length) return;
+    if (!images?.length) return;
 
-    const current = this.selectedImage() ?? arr[0];
-    const idx = arr.indexOf(current);
-    const safeIdx = idx >= 0 ? idx : 0;
-    const nextIdx = (safeIdx + 1) % arr.length;
-    this.selectedImage.set(arr[nextIdx]);
+    const current = this.selectedImage() ?? images[0];
+    const idx = Math.max(0, images.indexOf(current));
+    const next = (idx + 1) % images.length;
+
+    this.selectedImage.set(images[next]);
   }
 
   safeUrl(url: string): SafeResourceUrl {

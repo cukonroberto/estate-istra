@@ -3,6 +3,7 @@
     <a routerLink="/nekretnine">← Natrag na odabrane nekretnine</a>
   </div>
 
+  <!-- HERO: full width image, then title/meta/price UNDER -->
   <header class="hero">
     <div class="hero-media">
       <button
@@ -42,17 +43,21 @@
     </div>
 
     <div class="hero-info">
-      <h1>{{ p.title }}</h1>
+      <div class="title-row">
+        <h1>{{ p.title }}</h1>
+        <div class="price">{{ formatPrice(p.priceEUR) }}</div>
+      </div>
+
       <p class="meta">
         {{ p.location }}<ng-container *ngIf="p.microLocation">
           • {{ p.microLocation }}</ng-container
         >
         • {{ p.areaM2 }} m²
       </p>
-      <div class="price">{{ formatPrice(p.priceEUR) }}</div>
     </div>
   </header>
 
+  <!-- Sticky navigation strip: always visible -->
   <nav class="blok-nav" aria-label="Navigacija blokova">
     <div class="blok-items">
       <button
@@ -66,6 +71,7 @@
     </div>
   </nav>
 
+  <!-- 2) OPIS -->
   <section class="section" [attr.id]="'opis'">
     <h2>Opis nekretnine</h2>
 
@@ -80,6 +86,7 @@
 
   <mat-divider></mat-divider>
 
+  <!-- 3) TOČNA LOKACIJA -->
   <section class="section" [attr.id]="'lokacija'">
     <h2>Točna lokacija</h2>
 
@@ -100,6 +107,7 @@
     </ng-template>
   </section>
 
+  <!-- 4) DRON VIDEO -->
   <section class="section" [attr.id]="'dron'">
     <h2>Dron video</h2>
 
@@ -128,6 +136,7 @@
     </ng-template>
   </section>
 
+  <!-- 5) 3D MATTERPORT -->
   <section class="section" [attr.id]="'matterport'">
     <h2>3D (Matterport)</h2>
 
@@ -159,6 +168,7 @@
     </ng-template>
   </section>
 
+  <!-- 6) TLOCRT -->
   <section class="section" [attr.id]="'tlocrt'">
     <h2>Tlocrt</h2>
 
@@ -184,6 +194,7 @@
     </ng-template>
   </section>
 
+  <!-- 7) TEHNIČKI PODACI -->
   <section class="section" [attr.id]="'tehnicki'">
     <h2>Tehnički podaci</h2>
 
@@ -218,6 +229,7 @@
     </ng-template>
   </section>
 
+  <!-- 8) DOKUMENTACIJA -->
   <section class="section" [attr.id]="'dokumentacija'">
     <h2>Dokumentacija</h2>
 
