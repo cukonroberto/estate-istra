@@ -3,235 +3,275 @@
     <a routerLink="/nekretnine">← Natrag na odabrane nekretnine</a>
   </div>
 
-  <!-- 1) FIRST SCREEN (no scroll): hero -->
-  <section class="hero">
-    <div
-      class="hero-img"
-      [style.backgroundImage]="'url(' + (selectedImage() ?? p.imageUrl) + ')'"
-    >
-      <button
-        class="nav nav-left"
-        type="button"
-        (click)="prevImage()"
-        aria-label="Prethodna fotografija"
-        *ngIf="(allImages().length ?? 0) > 1"
+  <!-- 1) PRVI EKRAN (no scroll): big image + title + location + price -->
+  <header class="hero">
+    <div class="hero-media">
+      <div
+        class="hero-img"
+        [style.backgroundImage]="'url(' + selectedImage() + ')'"
+        role="img"
+        [attr.aria-label]="p.title"
       >
-        ‹
-      </button>
-
-      <button
-        class="nav nav-right"
-        type="button"
-        (click)="nextImage()"
-        aria-label="Sljedeća fotografija"
-        *ngIf="(allImages().length ?? 0) > 1"
-      >
-        ›
-      </button>
-    </div>
-
-    <div class="hero-info">
-      <div class="hero-text">
-        <h1>{{ p.title }}</h1>
-        <p class="meta">
-          {{ p.location }}<span *ngIf="p.microLocation">
-            • {{ p.microLocation }}</span
-          >
-          • {{ p.areaM2 }} m²
-        </p>
-      </div>
-      <div class="price">{{ formatPrice(p.priceEUR) }}</div>
-    </div>
-
-    <div class="thumbs" *ngIf="(allImages().length ?? 0) > 1">
-      <button
-        class="thumb"
-        *ngFor="let img of allImages(); let i = index"
-        type="button"
-        (click)="setImageIndex(i)"
-        [style.backgroundImage]="'url(' + img + ')'"
-        [class.active]="i === imageIndex()"
-        aria-label="Odaberi fotografiju"
-      ></button>
-    </div>
-  </section>
-
-  <!-- CAROUSEL OF BLOCKS 2-8 -->
-  <section class="blocks">
-    <div class="blocks-head">
-      <div class="block-label">Blok:</div>
-      <div class="block-title">{{ currentBlockTitle() }}</div>
-
-      <div class="block-nav">
-        <button mat-stroked-button type="button" (click)="prevBlock()">
+        <button
+          class="nav-arrow left"
+          type="button"
+          (click)="prevImage()"
+          *ngIf="gallery().length > 1"
+          aria-label="Prethodna fotografija"
+        >
           ‹
         </button>
-        <button mat-stroked-button type="button" (click)="nextBlock()">
+
+        <button
+          class="nav-arrow right"
+          type="button"
+          (click)="nextImage()"
+          *ngIf="gallery().length > 1"
+          aria-label="Sljedeća fotografija"
+        >
           ›
         </button>
       </div>
+
+      <div class="thumbs" *ngIf="gallery().length > 1">
+        <button
+          class="thumb"
+          *ngFor="let img of gallery(); let i = index"
+          type="button"
+          (click)="pickImage(i)"
+          [style.backgroundImage]="'url(' + img + ')'"
+          [class.active]="i === selectedIndex()"
+          aria-label="Odaberi fotografiju"
+        ></button>
+      </div>
     </div>
 
-    <mat-card class="block-card" appearance="outlined">
-      <mat-card-content>
-        <!-- 2) OPIS -->
-        <ng-container *ngIf="currentBlock() === 'opis'">
-          <p class="long" *ngIf="p.descriptionLong; else missingLong">
-            {{ p.descriptionLong }}
-          </p>
-          <ng-template #missingLong>
-            <div class="empty">Opis još nije dodan.</div>
-          </ng-template>
-        </ng-container>
+    <div class="hero-info">
+      <h1>{{ p.title }}</h1>
 
-        <!-- 3) MAP -->
-        <ng-container *ngIf="currentBlock() === 'mapa'">
-          <div class="embed" *ngIf="p.mapEmbedUrl; else missingMap">
-            <iframe
-              [src]="safeUrl(p.mapEmbedUrl)"
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-              allowfullscreen
-            ></iframe>
-          </div>
+      <p class="meta">
+        {{ p.location }}
+        <ng-container *ngIf="p.microLocation">
+          • {{ p.microLocation }}</ng-container
+        >
+        • {{ p.areaM2 }} m²
+      </p>
 
-          <ng-template #missingMap>
-            <div class="empty">Lokacija nije dostupna.</div>
-          </ng-template>
-        </ng-container>
+      <div class="price">{{ formatPrice(p.priceEUR) }}</div>
+    </div>
+  </header>
 
-        <!-- 4) DRONE VIDEO -->
-        <ng-container *ngIf="currentBlock() === 'dron'">
-          <div class="embed" *ngIf="p.droneEmbedUrl; else missingDrone">
-            <iframe
-              [src]="safeUrl(p.droneEmbedUrl)"
-              loading="lazy"
-              allow="
-                accelerometer;
-                autoplay;
-                clipboard-write;
-                encrypted-media;
-                gyroscope;
-                picture-in-picture;
-                web-share;
-              "
-              allowfullscreen
-            ></iframe>
-          </div>
+  <!-- Sticky navigation strip: click -> scroll -->
+  <nav class="blok-nav" aria-label="Navigacija blokova">
+    <div class="blok-items">
+      <button
+        class="blok-item"
+        *ngFor="let b of blocks()"
+        type="button"
+        (click)="scrollTo(b.id)"
+      >
+        {{ b.label }}
+      </button>
+    </div>
+  </nav>
 
-          <ng-template #missingDrone>
-            <div class="empty">Video nije dostupan.</div>
-          </ng-template>
-        </ng-container>
+  <!-- 2) OPIS -->
+  <section class="section" [attr.id]="'opis'">
+    <h2>Opis nekretnine</h2>
 
-        <!-- 5) MATTERPORT -->
-        <ng-container *ngIf="currentBlock() === 'matterport'">
-          <div class="row">
-            <a
-              *ngIf="p.matterportFullscreenUrl"
-              class="open-full"
-              [href]="p.matterportFullscreenUrl"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Otvori u punom ekranu →
-            </a>
-          </div>
+    <p class="long" *ngIf="p.descriptionLong; else shortDesc">
+      {{ p.descriptionLong }}
+    </p>
 
-          <div class="embed" *ngIf="p.matterportEmbedUrl; else missing3d">
-            <iframe
-              [src]="safeUrl(p.matterportEmbedUrl)"
-              loading="lazy"
-              allowfullscreen
-            ></iframe>
-          </div>
+    <ng-template #shortDesc>
+      <p class="long">{{ p.descriptionShort }}</p>
+    </ng-template>
+  </section>
 
-          <ng-template #missing3d>
-            <div class="empty">3D obilazak nije dostupan.</div>
-          </ng-template>
-        </ng-container>
+  <mat-divider></mat-divider>
 
-        <!-- 6) FLOOR PLANS -->
-        <ng-container *ngIf="currentBlock() === 'tlocrt'">
-          <div
-            class="plans"
-            *ngIf="(p.floorPlans?.length ?? 0) > 0; else missingPlans"
-          >
-            <div class="plan" *ngFor="let fp of (p.floorPlans ?? [])">
-              <div class="plan-label">{{ fp.label }}</div>
-              <div
-                class="plan-img"
-                [style.backgroundImage]="'url(' + fp.url + ')'"
-              ></div>
-            </div>
-          </div>
+  <!-- 3) TOČNA LOKACIJA -->
+  <section class="section" [attr.id]="'lokacija'">
+    <h2>Točna lokacija</h2>
 
-          <ng-template #missingPlans>
-            <div class="empty">Tlocrt nije dostupan.</div>
-          </ng-template>
-        </ng-container>
-
-        <!-- 7) TECH (accordion) -->
-        <ng-container *ngIf="currentBlock() === 'tehnicki'">
-          <ng-container
-            *ngIf="(visibleTechSections(p).length ?? 0) > 0; else missingTech"
-          >
-            <mat-accordion [multi]="false">
-              <mat-expansion-panel
-                *ngFor="let s of visibleTechSections(p); let idx = index"
-                [expanded]="idx === 0"
-              >
-                <mat-expansion-panel-header>
-                  <mat-panel-title>{{ s.title }}</mat-panel-title>
-                </mat-expansion-panel-header>
-
-                <div class="kv" *ngFor="let it of s.items">
-                  <div class="k">{{ it.label }}</div>
-                  <div class="v">{{ it.value }}</div>
-                </div>
-              </mat-expansion-panel>
-            </mat-accordion>
-          </ng-container>
-
-          <ng-template #missingTech>
-            <div class="empty">Tehnički podaci nisu dodani.</div>
-          </ng-template>
-        </ng-container>
-
-        <!-- 8) DOCS -->
-        <ng-container *ngIf="currentBlock() === 'dokumentacija'">
-          <div class="docs" *ngIf="(p.docs?.length ?? 0) > 0; else missingDocs">
-            <div class="doc" *ngFor="let d of (p.docs ?? [])">
-              <div class="doc-name">{{ d.label }}</div>
-              <a
-                class="doc-btn"
-                [href]="d.url"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Otvori PDF
-              </a>
-            </div>
-          </div>
-
-          <ng-template #missingDocs>
-            <div class="empty">Dokumentacija nije dostupna.</div>
-          </ng-template>
-        </ng-container>
-      </mat-card-content>
+    <mat-card class="embed" appearance="outlined">
+      <div class="embed-frame" *ngIf="p.mapEmbedUrl; else missingMap">
+        <iframe
+          [src]="safeUrl(p.mapEmbedUrl)"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen
+          title="Google mapa"
+        ></iframe>
+      </div>
     </mat-card>
 
-    <div class="cta">
-      <a
-        mat-flat-button
-        color="primary"
-        [routerLink]="['/zatrazi-razgled']"
-        [queryParams]="{ title: p.title, location: p.location, code: p.id }"
-      >
-        Zatraži razgled
-      </a>
-    </div>
+    <ng-template #missingMap>
+      <div class="empty">Nije dostupno.</div>
+    </ng-template>
   </section>
+
+  <!-- 4) DRON VIDEO -->
+  <section class="section" [attr.id]="'dron'">
+    <h2>Dron video</h2>
+
+    <mat-card class="embed" appearance="outlined">
+      <div class="embed-frame" *ngIf="p.droneEmbedUrl; else missingDrone">
+        <iframe
+          [src]="safeUrl(p.droneEmbedUrl)"
+          loading="lazy"
+          allow="
+            accelerometer;
+            autoplay;
+            clipboard-write;
+            encrypted-media;
+            gyroscope;
+            picture-in-picture;
+            web-share;
+          "
+          allowfullscreen
+          title="Dron video"
+        ></iframe>
+      </div>
+    </mat-card>
+
+    <ng-template #missingDrone>
+      <div class="empty">Nije dostupno.</div>
+    </ng-template>
+  </section>
+
+  <!-- 5) 3D MATTERPORT -->
+  <section class="section" [attr.id]="'matterport'">
+    <h2>3D (Matterport)</h2>
+
+    <mat-card class="embed" appearance="outlined">
+      <div class="embed-frame" *ngIf="p.matterportEmbedUrl; else missing3d">
+        <iframe
+          [src]="safeUrl(p.matterportEmbedUrl)"
+          loading="lazy"
+          allowfullscreen
+          title="Matterport 3D obilazak"
+        ></iframe>
+      </div>
+
+      <div class="embed-actions" *ngIf="p.matterportFullscreenUrl">
+        <a
+          mat-stroked-button
+          class="open-full"
+          [href]="p.matterportFullscreenUrl"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Otvori u punom ekranu
+        </a>
+      </div>
+    </mat-card>
+
+    <ng-template #missing3d>
+      <div class="empty">Nije dostupno.</div>
+    </ng-template>
+  </section>
+
+  <!-- 6) TLOCRT -->
+  <section class="section" [attr.id]="'tlocrt'">
+    <h2>Tlocrt</h2>
+
+    <div
+      class="plans"
+      *ngIf="(p.floorPlans?.length ?? 0) > 0; else missingPlan"
+    >
+      <mat-card
+        class="plan"
+        appearance="outlined"
+        *ngFor="let fp of (p.floorPlans ?? [])"
+      >
+        <div class="plan-head">{{ fp.label }}</div>
+        <div
+          class="plan-img"
+          [style.backgroundImage]="'url(' + fp.url + ')'"
+        ></div>
+      </mat-card>
+    </div>
+
+    <ng-template #missingPlan>
+      <div class="empty">Nije dostupno.</div>
+    </ng-template>
+  </section>
+
+  <!-- 7) TEHNIČKI PODACI -->
+  <section class="section" [attr.id]="'tehnicki'">
+    <h2>Tehnički podaci</h2>
+
+    <mat-card
+      appearance="outlined"
+      class="tech"
+      *ngIf="(p.techSections?.length ?? 0) > 0; else missingTech"
+    >
+      <mat-accordion class="acc" [multi]="false">
+        <mat-expansion-panel
+          *ngFor="let s of (p.techSections ?? []); let i = index"
+          [expanded]="i === 0"
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title>{{ s.title }}</mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <div class="kv">
+            <div class="row" *ngFor="let item of s.items">
+              <div class="k">{{ item.label }}</div>
+              <div class="v">{{ item.value }}</div>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </mat-card>
+
+    <ng-template #missingTech>
+      <div class="empty">
+        (MVP) Tehnički podaci će se prikazati kada ih dodamo u model.
+      </div>
+    </ng-template>
+  </section>
+
+  <!-- 8) DOKUMENTACIJA -->
+  <section class="section" [attr.id]="'dokumentacija'">
+    <h2>Dokumentacija</h2>
+
+    <mat-card appearance="outlined" class="docs">
+      <div
+        *ngIf="(p.docs?.length ?? 0) > 0; else missingDocs"
+        class="docs-list"
+      >
+        <div class="doc" *ngFor="let d of (p.docs ?? [])">
+          <div class="doc-title">{{ d.label }}</div>
+          <a
+            class="doc-btn"
+            mat-stroked-button
+            [href]="d.url"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Otvori PDF
+          </a>
+        </div>
+      </div>
+    </mat-card>
+
+    <ng-template #missingDocs>
+      <div class="empty">Nije dostupno.</div>
+    </ng-template>
+  </section>
+
+  <footer class="cta">
+    <a
+      mat-flat-button
+      color="primary"
+      [routerLink]="['/zatrazi-razgled']"
+      [queryParams]="{ title: p.title, location: p.location, code: p.id }"
+    >
+      Zatraži razgled
+    </a>
+  </footer>
 </div>
 
 <ng-template #notFound>
