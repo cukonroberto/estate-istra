@@ -15,9 +15,10 @@ export const PROPERTIES: Property[] = [
     descriptionShort:
       'Svijetao stan, blizu centra, idealno za odmor ili najam.',
     images: ['assets/1.jpg', 'assets/2.jpg', 'assets/3.jpg'],
-    droneUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', // placeholder
-    matterportUrl: 'https://my.matterport.com/show/?m=XXXXXXXXXXX', // placeholder
-    floorPlanUrl: 'assets/background.jpg',
+    droneEmbedUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    matterportEmbedUrl: 'https://my.matterport.com/show/?m=XXXXX&play=1',
+    matterportFullscreenUrl: 'https://my.matterport.com/show/?m=XXXXX',
+    floorPlans: [{ label: 'Tlocrt', url: '...' }],
     docs: [
       { label: 'Vlasnički list (PDF)', url: '#' },
       { label: 'Energetski certifikat (PDF)', url: '#' },
@@ -38,9 +39,10 @@ export const PROPERTIES: Property[] = [
     descriptionShort:
       'Privatnost, mir i odlična povezanost. Spremno za useljenje.',
     images: ['assets/1.jpg', 'assets/2.jpg', 'assets/3.jpg'],
-    droneUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', // placeholder
-    matterportUrl: 'https://my.matterport.com/show/?m=XXXXXXXXXXX', // placeholder
-    floorPlanUrl: 'assets/background.jpg',
+    droneEmbedUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    matterportEmbedUrl: 'https://my.matterport.com/show/?m=XXXXX&play=1',
+    matterportFullscreenUrl: 'https://my.matterport.com/show/?m=XXXXX',
+    floorPlans: [{ label: 'Tlocrt', url: '...' }],
     docs: [
       { label: 'Vlasnički list (PDF)', url: '#' },
       { label: 'Energetski certifikat (PDF)', url: '#' },
@@ -59,9 +61,10 @@ export const PROPERTIES: Property[] = [
     descriptionShort:
       'Odlična lokacija za investiciju. Blizina mora i infrastrukture.',
     images: ['assets/1.jpg', 'assets/2.jpg', 'assets/3.jpg'],
-    droneUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', // placeholder
-    matterportUrl: 'https://my.matterport.com/show/?m=XXXXXXXXXXX', // placeholder
-    floorPlanUrl: 'assets/background.jpg',
+    droneEmbedUrl: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    matterportEmbedUrl: 'https://my.matterport.com/show/?m=XXXXX&play=1',
+    matterportFullscreenUrl: 'https://my.matterport.com/show/?m=XXXXX',
+    floorPlans: [{ label: 'Tlocrt', url: '...' }],
     docs: [
       { label: 'Vlasnički list (PDF)', url: '#' },
       { label: 'Energetski certifikat (PDF)', url: '#' },
