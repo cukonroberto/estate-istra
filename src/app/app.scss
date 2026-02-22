@@ -1,26 +1,66 @@
 .topbar {
-  position: fixed;
+  position: sticky;
   top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
+  z-index: 20;
 
-  background: rgba(255, 255, 255, 0.55);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  height: 64px;
+  padding: 0 18px;
 
+  background: rgba(255, 255, 255, 0.82);
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-  box-shadow: none;
 
-  color: #111;
+  /* This is what makes text look “soft” sometimes.
+     Keep blur modest, and remove it on mobile if you want it razor sharp. */
+  backdrop-filter: blur(10px);
 }
 
-.topbar a {
-  color: inherit;
+.brand {
   text-decoration: none;
-  font-weight: 600;
+  color: rgba(0, 0, 0, 0.9);
+  font-weight: 900;
+  letter-spacing: -0.2px;
 }
 
 .spacer {
-  flex: 1 1 auto;
+  flex: 1;
+}
+
+.nav-desktop {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.nav-desktop a {
+  font-weight: 700;
+}
+
+:host ::ng-deep .nav-desktop a.active .mdc-button__label {
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+.nav-mobile-btn {
+  display: none;
+}
+
+/* Mobile */
+@media (max-width: 820px) {
+  .topbar {
+    height: 56px;
+    padding: 0 10px;
+    backdrop-filter: blur(6px);
+  }
+
+  .nav-desktop {
+    display: none;
+  }
+
+  .nav-mobile-btn {
+    display: inline-flex;
+  }
+
+  .brand {
+    font-size: 16px;
+  }
 }

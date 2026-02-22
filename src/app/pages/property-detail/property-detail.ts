@@ -35,21 +35,7 @@ export class PropertyDetail {
     PROPERTIES.find((p) => p.id === this.id()),
   );
 
-  // gallery and selection
-  selectedIndex = signal<number>(0);
-
-  gallery = computed<string[]>(() => {
-    const p = this.property();
-    if (!p) return [];
-    const imgs = (p.images ?? []).filter(Boolean);
-    return imgs.length ? imgs : [p.imageUrl];
-  });
-
-  selectedImage = computed<string>(() => {
-    const g = this.gallery();
-    const idx = this.selectedIndex();
-    return g[Math.max(0, Math.min(idx, g.length - 1))] ?? g[0] ?? '';
-  });
+  selectedImage = signal<string | null>(null);
 
   constructor(
     route: ActivatedRoute,
@@ -59,8 +45,9 @@ export class PropertyDetail {
       const id = pm.get('id') ?? '';
       this.id.set(id);
 
-      // reset selection on route change
-      this.selectedIndex.set(0);
+      const p = PROPERTIES.find((x) => x.id === id);
+      const first = p?.images?.[0] ?? p?.imageUrl ?? null;
+      this.selectedImage.set(first);
     });
   }
 
@@ -68,25 +55,30 @@ export class PropertyDetail {
     return new Intl.NumberFormat('de-DE').format(value) + ' €';
   }
 
-  pickImage(index: number) {
-    const g = this.gallery();
-    if (!g.length) return;
-    const safe = Math.max(0, Math.min(index, g.length - 1));
-    this.selectedIndex.set(safe);
+  pickImage(url: string) {
+    this.selectedImage.set(url);
   }
 
-  prevImage() {
-    const g = this.gallery();
-    if (g.length <= 1) return;
-    const next = (this.selectedIndex() - 1 + g.length) % g.length;
-    this.selectedIndex.set(next);
+  prevImage(images: string[]) {
+    const arr = images?.length ? images : [];
+    if (!arr.length) return;
+
+    const current = this.selectedImage() ?? arr[0];
+    const idx = arr.indexOf(current);
+    const safeIdx = idx >= 0 ? idx : 0;
+    const nextIdx = (safeIdx - 1 + arr.length) % arr.length;
+    this.selectedImage.set(arr[nextIdx]);
   }
 
-  nextImage() {
-    const g = this.gallery();
-    if (g.length <= 1) return;
-    const next = (this.selectedIndex() + 1) % g.length;
-    this.selectedIndex.set(next);
+  nextImage(images: string[]) {
+    const arr = images?.length ? images : [];
+    if (!arr.length) return;
+
+    const current = this.selectedImage() ?? arr[0];
+    const idx = arr.indexOf(current);
+    const safeIdx = idx >= 0 ? idx : 0;
+    const nextIdx = (safeIdx + 1) % arr.length;
+    this.selectedImage.set(arr[nextIdx]);
   }
 
   safeUrl(url: string): SafeResourceUrl {
@@ -99,7 +91,6 @@ export class PropertyDetail {
     el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
-  // Hide blocks with no content (except Opis)
   blocks = computed<BlockItem[]>(() => {
     const p = this.property();
     if (!p) return [];

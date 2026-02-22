@@ -1,15 +1,40 @@
-<mat-toolbar class="topbar" *ngIf="!isHome">
-  <span style="font-weight: 700" routerLink="/home">Estate Istra</span>
+<mat-toolbar class="topbar" color="transparent">
+  <a class="brand" routerLink="/">Estate Istra</a>
 
   <span class="spacer"></span>
 
-  <ng-container *ngIf="!isHome">
-    <a mat-button routerLink="/nekretnine">Nekretnine</a>
-    <a mat-button routerLink="/kako-radimo">Kako radimo</a>
-    <a mat-button routerLink="/za-kupce">Za kupce</a>
-    <a mat-button routerLink="/za-vlasnike">Za vlasnike</a>
-    <a mat-button routerLink="/kontakt">Kontakt</a>
-  </ng-container>
+  <!-- Desktop nav -->
+  <nav class="nav-desktop" aria-label="Glavna navigacija">
+    <a mat-button routerLink="/nekretnine" routerLinkActive="active"
+      >Nekretnine</a
+    >
+    <a mat-button routerLink="/kako-radimo" routerLinkActive="active"
+      >Kako radimo</a
+    >
+    <a mat-button routerLink="/za-kupce" routerLinkActive="active">Za kupce</a>
+    <a mat-button routerLink="/za-vlasnike" routerLinkActive="active"
+      >Za vlasnike</a
+    >
+    <a mat-button routerLink="/kontakt" routerLinkActive="active">Kontakt</a>
+  </nav>
+
+  <!-- Mobile menu -->
+  <button
+    mat-icon-button
+    class="nav-mobile-btn"
+    [matMenuTriggerFor]="mobileMenu"
+    aria-label="Otvori izbornik"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <mat-menu #mobileMenu="matMenu">
+    <button mat-menu-item routerLink="/nekretnine">Nekretnine</button>
+    <button mat-menu-item routerLink="/kako-radimo">Kako radimo</button>
+    <button mat-menu-item routerLink="/za-kupce">Za kupce</button>
+    <button mat-menu-item routerLink="/za-vlasnike">Za vlasnike</button>
+    <button mat-menu-item routerLink="/kontakt">Kontakt</button>
+  </mat-menu>
 </mat-toolbar>
 
 <router-outlet></router-outlet>
